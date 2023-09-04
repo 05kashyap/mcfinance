@@ -11,11 +11,13 @@ class FinancialExtractor:
     @cached(cache=report_cache)
     
     def __init__(self, user_input, years=10, docs=["balance sheet", "profit loss", "cash flow"]) -> None:
+        '''Initialize extractor with company name, number of years and required documents'''
         self.user_input = user_input.replace(" ", "")
         self.years = years
         self.docs = docs
 
     def __urlfinder(self, search_term):
+        '''Find google search results'''
         results = 5
         page = requests.get(f"https://www.google.com/search?q={search_term}&num={results}")
         soup1 = BeautifulSoup(page.content, "html5lib")
@@ -27,6 +29,7 @@ class FinancialExtractor:
                 return link_g
 
     def __comp_name(self, ticker):
+        '''Find company name from ticker number (experimental)'''
         page = requests.get(f"https://www.google.com/search?q=bombay+india+{ticker}")
         soup1 = BeautifulSoup(page.content, "html5lib")
         links = soup1.findAll("a")
@@ -38,6 +41,7 @@ class FinancialExtractor:
                     return link_g.split("/")[4]
 
     def __retinfo(self, url) -> pd.DataFrame:
+        '''Extract tables from a url'''
         new_url = url.replace("https", "http")
         url = requests.get(new_url)
         dfs = pd.read_html(url.text)
@@ -45,6 +49,7 @@ class FinancialExtractor:
         return df
 
     def __excel_writer(self, daf, words) -> None:
+        '''Write dataframe into .excel file'''
         web, name, info = words[1], words[0], (words[3] + words[4])
         writer = pd.ExcelWriter(web + '_' + name + '_' + info + '.xlsx')
         daf = daf.drop(daf.iloc[:, self.years+1:],axis = 1)
@@ -53,6 +58,7 @@ class FinancialExtractor:
         print(f'{name} {info} data is written successfully to Excel File.')
 
     def __prd(self, url, period, last, trm, a) -> pd.DataFrame:
+        '''Retrieve data for multiple years'''
         if period > a or period // 5 == trm:
             df = self.__retinfo(url)
             df.drop(df.columns[[0, 6]], inplace=True, axis=1)
@@ -63,6 +69,7 @@ class FinancialExtractor:
             return df
 
     def __search_gen(self, search_term, period) -> pd.DataFrame:
+        '''Handles retrieval of data and generation of urls'''
         term = period % 5
         last = 5 - period
         # generate datafrane from the search term
@@ -90,6 +97,7 @@ class FinancialExtractor:
         return fdf
 
     def get_info(self) -> None:
+        '''User callable function to retrieve required data'''
         print("retieving data...")
         company = ""
         if (self.user_input.isnumeric() and len(self.user_input) == 6):

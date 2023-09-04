@@ -4,10 +4,12 @@ import pandas as pd
 from bs4 import BeautifulSoup
 import html5lib
 import lxml
-
+from cachetools import cached, TTLCache
 
 class FinancialExtractor:
-
+    report_cache = TTLCache(maxsize=100, ttl=3600)
+    @cached(cache=report_cache)
+    
     def __init__(self, user_input, years=10, docs=["balance sheet", "profit loss", "cash flow"]) -> None:
         self.user_input = user_input.replace(" ", "")
         self.years = years

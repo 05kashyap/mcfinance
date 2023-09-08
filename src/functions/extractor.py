@@ -24,7 +24,7 @@ class FinancialExtractor:
         self.filepath = filepath
 
     def plotter(self,attr,doc="balance sheet"):
-        '''Plots a specific company attribute over selected years'''
+        '''(experimental) Plots a specific company attribute over selected years'''
         print("plotting...")
         df = self.search_gen(self.company+" moneycontrol consolidated "+ doc, self.years)
         row_num = df[df[df.columns[0]] == attr].index

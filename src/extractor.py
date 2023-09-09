@@ -8,7 +8,7 @@ from cachetools import cached, TTLCache
 import matplotlib.pyplot as plt
 import time
 
-class FinancialExtractor:
+class Extractor:
     report_cache = TTLCache(maxsize=100, ttl=3600) 
     url_cache = TTLCache(maxsize=100, ttl=3600) 
     
@@ -23,11 +23,11 @@ class FinancialExtractor:
             self.company = self.user_input
         self.filepath = filepath
 
-    def plotter(self,attr,doc="balance sheet"):
+    def plotter(self,attribute,doc="balance sheet"):
         '''(experimental) Plots a specific company attribute over selected years'''
         print("plotting...")
         df = self.search_gen(self.company+" moneycontrol consolidated "+ doc, self.years)
-        row_num = df[df[df.columns[0]] == attr].index
+        row_num = df[df[df.columns[0]] == attribute].index
         #column_names = list(df.columns)
         col_names = df.loc[0, :].values.flatten().tolist()
         X = col_names[1:]
@@ -38,7 +38,7 @@ class FinancialExtractor:
         Y = [float(i) for i in Y]
         plt.plot(X,Y,"-o")
         plt.xlabel("month-year")
-        plt.ylabel(attr)
+        plt.ylabel(attribute)
         plt.show()
 
     @cached(cache=report_cache)
@@ -83,7 +83,7 @@ class FinancialExtractor:
         return df
 
     def __excel_writer(self, daf, words) -> None:
-        '''Write dataframe into .excel file'''
+        '''Write dataframe into pandas dataframe or excel file'''
         web, name, info = words[1], words[0], (words[3]+words[4])
         if self.filepath != "":
             self.filepath += "/"
@@ -91,7 +91,11 @@ class FinancialExtractor:
         daf.to_excel(writer)
         writer.close()
         print(f'{name} {info} data is written successfully to Excel File.')
-
+    
+    def __df_writer(self, daf) -> pd.DataFrame:
+        print("writing...")
+        return daf
+    
     def __prd(self, url, period, last, trm, a) -> pd.DataFrame:
         '''Retrieve data for multiple years'''
         if period > a or period//5 == trm:
@@ -135,11 +139,14 @@ class FinancialExtractor:
         
         return fdf
 
-    def get_info(self) -> None:
-        '''User callable function to retrieve required data'''
+    def get_info(self, option = 1):
+        '''option 0: return a dataframe; option 1: write contents to excel file'''
         print("retrieving data...")
+        strg = []
         for doc in self.docs:
         #generate data from docs
-            stx = self.company
-            stx += " moneycontrol consolidated "+ doc
-            self.__excel_writer(self.search_gen(stx, self.years), stx.split())
+            stx = self.company + " moneycontrol consolidated " + doc
+            if(option == 1):
+                self.__excel_writer(self.search_gen(stx, self.years), stx.split())
+            else:
+                return self.__df_writer(self.search_gen(stx, self.years))

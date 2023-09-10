@@ -23,7 +23,7 @@ Company.get_info()
 ```
 ### Export company details into pandas data frame
 ```python
-DataFrame1, DataFrame2, DataFrame3 = Company.get_info(option=0)
+DataFrame1, DataFrame2, DataFrame3 = Company.get_info(option = 0)
 ```
 
 ### Plot certain attribute over selected years using matplotlib (experimental)

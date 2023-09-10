@@ -12,7 +12,7 @@ VERSION = "0.0.1"
 DESCRIPTION = "Financial Data Extractor"
 LONG_DESCRIPTION = "First release of the moneycontrol financial data extracter"
 
-setup(name="finextractor",
+setup(name="moneycontrol-financial_extractor",
       version=VERSION,
       author="05kashyap-ragha1992",
       author_email="<aryankashyapnaveen@gmail.com>",

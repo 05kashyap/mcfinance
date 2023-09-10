@@ -1,1 +1,1 @@
-from functions.extractor import Extractor
+from src import Extractor

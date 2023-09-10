@@ -13,7 +13,12 @@ class Extractor:
     url_cache = TTLCache(maxsize=100, ttl=3600) 
     
     def __init__(self, user_input, years = 10, docs = ["balance sheet","profit loss","cash flow"], filepath = "") -> None:
-        '''Initialize extractor with company name, number of years and required documents'''
+        '''variables:
+            user_input : string/int (required)
+            years : int (default = 10)
+            docs : list (default = ["balance sheet","profit loss","cash flow"])
+            filepath : string (default = current directory)
+        '''
         self.user_input = user_input.replace(" ","")
         self.years = years
         self.docs = docs
@@ -149,4 +154,6 @@ class Extractor:
             if(option == 1):
                 self.__excel_writer(self.search_gen(stx, self.years), stx.split())
             else:
-                return self.__df_writer(self.search_gen(stx, self.years))
+                strg.append(self.__df_writer(self.search_gen(stx, self.years)))
+        if(option!=1):
+            return strg

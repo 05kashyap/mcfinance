@@ -12,7 +12,7 @@ Export any selected data into either pandas dataframe or excel sheet with ease!
 ### Initialise company details:
 ```python
 import extractor as ex
-Company = ex.FinancialExtractor(user_input= "Company_name",years = 10, docs = ["balance sheet", "profit loss", "cash flow"])
+Company = ex.FinancialExtractor(user_input= "Company_name", years = 10, docs = ["balance sheet", "profit loss", "cash flow"])
 ```
 
 ### Export company details as excel file (default)

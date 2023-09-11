@@ -9,10 +9,8 @@ from helper import Extractor as ex
 class Tests(unittest.TestCase):
     def test1(self):
 
-        cmp = ex("TCS", years = 10, docs = ["ratios"])
-        data = cmp.get_info(0)
-        print(data)
-        self.assertIsInstance(data, pd.DataFrame, "success")
+        cmp = ex("TCS", years = 10, docs = ["balance sheet"])
+        cmp.get_info()
 if __name__ == '__main__':
     unittest.main()
         

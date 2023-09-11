@@ -5,7 +5,7 @@ class Extractor:
         '''Initialize extractor with company name, number of years and required documents'''
         self.user_input = user_input.replace(" ","")
         self.years = years
-        self.docs = docs
+        self.docs = [doc.replace(" ","") for doc in docs]
         if(self.user_input.isnumeric() and len(self.user_input) == 6):
             self.company = self.__comp_name(self.user_input)
         else:
@@ -33,21 +33,13 @@ class Extractor:
         else:
             return
     #just works dont TOUCH
-    def plotter(self,attribute,doc="balance sheet"):
+    def plotter(self,attribute):
         '''(experimental) Plots a specific company attribute over selected years'''
-        print("plotting...")
-        df = self.extractors.search_gen(self.company+" moneycontrol consolidated "+ doc, self.years)
-        row_num = df[df[df.columns[0]] == attribute].index
-
-        col_names = df.loc[0, :].values.flatten().tolist()
-        X = col_names[1:]
-        X.reverse()
-        row_list = df.loc[row_num, :].values.flatten().tolist()
-        Y = row_list[1:]
-        Y.reverse()
-        Y = [float(i) for i in Y]
-
+        X, Y = self.extractors.plo(attribute= attribute, search_term=self.company + " moneycontrol consolidated " + self.docs[0], period= self.years)
         plt.plot(X,Y,"-o")
         plt.xlabel("month-year")
         plt.ylabel(attribute)
         plt.show()
+
+    def ratios(self):
+        pass

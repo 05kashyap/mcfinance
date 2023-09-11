@@ -43,3 +43,18 @@ def search_gen(search_term, period) -> pd.DataFrame:
     fdf = fdf.drop(fdf.iloc[:, period+1:],axis = 1)
     
     return fdf
+
+def plo(attribute, search_term, period):
+    print("plotting...")
+    df = search_gen(search_term, period)
+    col_names = df.loc[0, :].values.flatten().tolist()
+    X = col_names[1:]
+    X.reverse()
+    rows = df.loc[df[df.columns[0]] == attribute].squeeze().tolist()
+    print(rows)
+    Y = rows[1:]
+    Y.reverse()
+    Y = [float(i) for i in Y]
+    print(Y)
+    print(X)
+    return X,Y

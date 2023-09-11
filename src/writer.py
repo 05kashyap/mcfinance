@@ -2,7 +2,7 @@ import pandas as pd
 
 def excel_writer(daf, words, filepath) -> None:
     '''Write dataframe into pandas dataframe or excel file'''
-    web, name, info = words[1], words[0], (words[3]+words[4])
+    web, name, info = words[1], words[0], words[3]
     if filepath != "":
         filepath += "/"
     writer = pd.ExcelWriter(filepath+web+'_'+name+'_'+info+'.xlsx')

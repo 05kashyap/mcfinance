@@ -10,7 +10,7 @@ class Tests(unittest.TestCase):
     def test2(self):
 
         cmp = ex("TCS", years = 10, docs = ["ratios"])
-        cmp.plotter(attribute = "EV/EBITDA (X)")
+        cmp.plotter(attribute = "E")
 if __name__ == '__main__':
     unittest.main()
         

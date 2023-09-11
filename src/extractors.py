@@ -50,11 +50,12 @@ def plo(attribute, search_term, period):
     col_names = df.loc[0, :].values.flatten().tolist()
     X = col_names[1:]
     X.reverse()
-    rows = df.loc[df[df.columns[0]] == attribute].squeeze().tolist()
-    print(rows)
+    if(df[df.columns[0]] == attribute).any():
+        rows = df.loc[df[df.columns[0]] == attribute].squeeze().tolist()
+    else:
+        raise Exception("attribute does not exist in this file")
+        return
     Y = rows[1:]
     Y.reverse()
     Y = [float(i) for i in Y]
-    print(Y)
-    print(X)
     return X,Y

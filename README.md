@@ -1,4 +1,4 @@
-# financial_extractor
+#moneycontrol financial_extractor
 
 Currently in experimentation phase
 

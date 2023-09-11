@@ -11,7 +11,7 @@ Export any selected data into either pandas dataframe or excel sheet with ease!
  
 ## Usage:
 ### Initialise company details:
-#### Create an Extractor instance with company namr (required) and/or number of years(default), required documents(default), and filepath to write documents(default current directory).
+#### Create an Extractor instance with company name/ BSE/ NSE ID (required) and/or number of years(default), required documents(default), and filepath to write documents(default current directory).
 
 ```python
 import extractor

@@ -6,10 +6,7 @@ class Extractor:
         self.user_input = user_input.replace(" ","")
         self.years = years
         self.docs = [doc.replace(" ","") for doc in docs]
-        if(self.user_input.isnumeric() and len(self.user_input) == 6):
-            self.company = self.__comp_name(self.user_input)
-        else:
-            self.company = self.user_input
+        self.company = self.__comp_name(self.user_input)
         self.filepath = filepath
         
 

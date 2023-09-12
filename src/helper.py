@@ -33,13 +33,14 @@ class Extractor:
         else:
             return
     #just works dont TOUCH
-    def plotter(self,attribute):
+    def plotter(self,*attributes):
         '''(experimental) Plots a specific company attribute over selected years'''
-        X, Y = self.extractors.plo(attribute= attribute, search_term=self.company + " moneycontrol consolidated " + self.docs[0], period= self.years)
-        plt.plot(X,Y,"-o")
-        plt.xlabel("month-year")
-        plt.ylabel(attribute)
-        plt.show()
-
-    def ratios(self):
-        pass
+        attr = list(attributes)
+        adict = dict(zip(attr, self.docs))
+        for at, doc in adict.items():
+            psearch = self.company + " moneycontrol consolidated " + doc
+            X, Y = self.extractors.plo(attribute= at, search_term= psearch, period= self.years)
+            plt.plot(X,Y,"-o")
+            plt.xlabel("month-year")
+            plt.ylabel(at)
+            plt.show()

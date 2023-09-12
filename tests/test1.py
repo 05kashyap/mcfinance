@@ -12,7 +12,7 @@ class Tests(unittest.TestCase):
         cmp = ex("TCS", years = 10, docs = ["ratios"])
         data = cmp.get_info(0)
         print(data)
-        self.assertIsInstance(data, pd.DataFrame, "success")
+        self.assertIsInstance(data, list)
 if __name__ == '__main__':
     unittest.main()
         

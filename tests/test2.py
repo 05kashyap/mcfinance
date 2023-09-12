@@ -9,8 +9,8 @@ from helper import Extractor as ex
 class Tests(unittest.TestCase):
     def test2(self):
 
-        cmp = ex("TCS", years = 10, docs = ["ratios"])
-        cmp.plotter(attribute = "EV/EBITDA (X)")
+        cmp = ex("TCS", years = 10, docs = ["balance sheet","ratios"])
+        cmp.plotter("Total Current Liabilities", "EV/EBITDA (X)")
 if __name__ == '__main__':
     unittest.main()
         

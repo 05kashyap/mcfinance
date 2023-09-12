@@ -1,12 +1,13 @@
 import matplotlib.pyplot as plt
 
 class Extractor:
+    import retrieval
     def __init__(self, user_input, years = 10, docs = ["balance sheet","profit loss","cash flow"], filepath = "") -> None:
         '''Initialize extractor with company name, number of years and required documents'''
-        self.user_input = user_input.replace(" ","")
+        self.company = self.retrieval.comp_name(user_input)
+        self.company = self.company.replace(" ","")
         self.years = years
         self.docs = [doc.replace(" ","") for doc in docs]
-        self.company = self.__comp_name(self.user_input)
         self.filepath = filepath
         
 

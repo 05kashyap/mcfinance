@@ -36,11 +36,11 @@ def retinfo(url) -> pd.DataFrame:
     df = dfs[0]
     return df
 
-dfse = pd.readcsv("https://raw.githubusercontent.com/05kashyap/moneycontrol_financial-extractor/main/Equity.csv",index_col = False)
+dfse = pd.read_csv("https://raw.githubusercontent.com/05kashyap/moneycontrol_financial-extractor/main/Equity.csv",index_col = False)
 dictbse = dfse.set_index('Security Code')['Issuer Name'].to_dict()
 dictnse = dfse.set_index('Security Id')['Issuer Name'].to_dict()
 
-def __comp_name(ticker):
+def comp_name(ticker):
     if ticker.isnumeric() and len(ticker) == 6:
         ticker = int(ticker)
         return dictbse[ticker]

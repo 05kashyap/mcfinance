@@ -9,7 +9,7 @@ from helper import Extractor as ex
 class Tests(unittest.TestCase):
     def test1(self):
 
-        cmp = ex("TCS", years = 10, docs = ["balance sheet"])
+        cmp = ex("532540", years = 10, docs = ["balance sheet"])
         cmp.get_info()
 if __name__ == '__main__':
     unittest.main()

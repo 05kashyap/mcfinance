@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import requests
 import time
 import pandas as pd
+import json
 
 report_cache = TTLCache(maxsize=100, ttl=3600) 
 url_cache = TTLCache(maxsize=100, ttl=3600) 
@@ -36,15 +37,14 @@ def retinfo(url) -> pd.DataFrame:
     df = dfs[0]
     return df
 
-dfse = pd.read_csv("https://raw.githubusercontent.com/05kashyap/moneycontrol_financial-extractor/main/Equity.csv",index_col = False)
-dictbse = dfse.set_index('Security Code')['Issuer Name'].to_dict()
-dictnse = dfse.set_index('Security Id')['Issuer Name'].to_dict()
-
 def comp_name(ticker):
     if ticker.isnumeric() and len(ticker) == 6:
-        ticker = int(ticker)
+        with open('dictbse.json') as f:
+            dictbse = json.load(f)
         return dictbse[ticker]
     elif ticker.isupper():
+        with open('dictnse.json') as f:
+            dictnse = json.load(f)
         return dictnse[ticker]        
     else:
         return ticker

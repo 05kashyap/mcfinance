@@ -39,11 +39,11 @@ def retinfo(url) -> pd.DataFrame:
 
 def comp_name(ticker):
     if ticker.isnumeric() and len(ticker) == 6:
-        with open('dictbse.json') as f:
+        with open('src/dictbse.json') as f:
             dictbse = json.load(f)
         return dictbse[ticker]
     elif ticker.isupper():
-        with open('dictnse.json') as f:
+        with open('src/dictnse.json') as f:
             dictnse = json.load(f)
         return dictnse[ticker]        
     else:

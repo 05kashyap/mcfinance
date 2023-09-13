@@ -9,7 +9,7 @@ from helper import Extractor as ex
 class Tests(unittest.TestCase):
     def test1(self):
 
-        cmp = ex("TCS", years = 10, docs = ["ratios"])
+        cmp = ex(532540, years = 10, docs = ["ratios"])
         data = cmp.get_info(0)
         print(data)
         self.assertIsInstance(data, list)

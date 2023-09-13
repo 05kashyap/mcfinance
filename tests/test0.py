@@ -9,8 +9,10 @@ from helper import Extractor as ex
 class Tests(unittest.TestCase):
     def test1(self):
 
-        cmp = ex("TCS", years = 10, docs = ["balance sheet"])
-        cmp.get_info()
+        cmp = ex(532540, years = 10, docs = ["balance sheet", "ratios"])
+        cmp.set_inputs(years = 5)
+        print(cmp.get_inputs())
+        #cmp.get_info()
 if __name__ == '__main__':
     unittest.main()
         

@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import requests
 import time
 import pandas as pd
+import json
 
 report_cache = TTLCache(maxsize=100, ttl=3600) 
 url_cache = TTLCache(maxsize=100, ttl=3600) 
@@ -36,14 +37,17 @@ def retinfo(url) -> pd.DataFrame:
     df = dfs[0]
     return df
 
-def __comp_name(ticker):
-    '''Find company name from ticker number (experimental)'''
-    page = requests.get(f"https://www.google.com/search?q=bombay+india+{ticker}")
-    soup1 = BeautifulSoup(page.content, "html5lib")
-    links = soup1.findAll("a")
-    for link in links:
-        link_href = link.get('href')
-        if "url?q=" in link_href and not "webcache" in link_href:
-            link_g = link.get('href').split("?q=")[1].split("&sa=U")[0]
-            if (link_g.split('.')[1] == "bseindia"):
-                return link_g.split("/")[4]
+def comp_name(ticker):
+
+    if isinstance(ticker, int):
+        ticker = str(ticker)
+    if ticker.isnumeric() and len(ticker) == 6:
+        with open('src/dictbse.json') as f:
+            dictbse = json.load(f)
+        return dictbse[ticker]
+    elif ticker.isupper():
+        with open('src/dictnse.json') as f:
+            dictnse = json.load(f)
+        return dictnse[ticker]        
+    else:
+        return ticker

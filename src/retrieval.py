@@ -38,7 +38,7 @@ def retinfo(url) -> pd.DataFrame:
     return df
 
 def comp_name(ticker):
-
+   
     if isinstance(ticker, int):
         ticker = str(ticker)
     if ticker.isnumeric() and len(ticker) == 6:
@@ -51,3 +51,4 @@ def comp_name(ticker):
         return dictnse[ticker]        
     else:
         return ticker
+

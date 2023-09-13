@@ -41,3 +41,13 @@ DataFrame1, DataFrame2, DataFrame3 = Company.get_info(option = 0)
 ```python
 company.plotter(attribute = "certain file attribute of the document")
 ```
+#### Usage example: 
+
+```python
+cmp = ex("TCS", years = 10, docs = ["ratios"])
+cmp.plotter(attribute = "EV/EBITDA (X)")
+```
+output:
+
+![image](https://github.com/05kashyap/moneycontrol_financial-extractor/assets/120780494/f5be744e-e065-4b03-b6df-2ca7e765c4b2)
+

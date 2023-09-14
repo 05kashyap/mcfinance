@@ -1,6 +1,4 @@
-# financial_extractor
-
-Currently in experimentation phase
+# mcfinance
 
 Developed by ragha1992 and 05kashyap
 

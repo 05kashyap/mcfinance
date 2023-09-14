@@ -42,11 +42,11 @@ def comp_name(ticker):
     if isinstance(ticker, int):
         ticker = str(ticker)
     if ticker.isnumeric() and len(ticker) == 6:
-        with open('src/dictbse.json') as f:
+        with open('mcfinance/dictbse.json') as f:
             dictbse = json.load(f)
         return dictbse[ticker]
     elif ticker.isupper():
-        with open('src/dictnse.json') as f:
+        with open('mcfinance/dictnse.json') as f:
             dictnse = json.load(f)
         return dictnse[ticker]        
     else:

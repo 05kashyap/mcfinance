@@ -12,7 +12,7 @@ VERSION = "0.0.1"
 DESCRIPTION = "money control financial data extractor. Requires python 3.7+"
 LONG_DESCRIPTION = "First release of mcfinance"
 
-setup(name="moneycontrol-financial_extractor",
+setup(name="mcfinance",
       version=VERSION,
       author="05kashyap-ragha1992",
       author_email="<aryankashyapnaveen@gmail.com>",

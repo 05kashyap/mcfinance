@@ -6,6 +6,9 @@ Developed by ragha1992 and 05kashyap
 
 Extract financial data from the money control website using the company name, BSE or NSE number.
 Export any selected data into either pandas dataframe or excel sheet with ease!
+### .
+
+*Disclaimer*: We are in no way affiliated with moneycontrol.com
  
 ## Usage:
 ### Initialise company details:

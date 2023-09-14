@@ -9,8 +9,8 @@ with codecs.open(os.path.join(here, "README.md"), encoding="utf-8") as fh:
 
 
 VERSION = "0.0.1"
-DESCRIPTION = "Financial Data Extractor"
-LONG_DESCRIPTION = "First release of the moneycontrol financial data extracter"
+DESCRIPTION = "money control financial data extractor. Requires python 3.7+"
+LONG_DESCRIPTION = "First release of mcfinance"
 
 setup(name="moneycontrol-financial_extractor",
       version=VERSION,
@@ -20,7 +20,8 @@ setup(name="moneycontrol-financial_extractor",
       long_description_content_type = "text/markdown",
       long_description= LONG_DESCRIPTION,
       packages=find_packages(),
-      install_requires = ['pandas', 'bs4', 'html5lib', 'lxml','matplotlib'],
+      package_data={'': ['*.json']}
+      install_requires = ['pandas', 'bs4', 'html5lib', 'lxml','matplotlib','requests'],
       keywords=['python','financial','extractor','data'],
       classifiers=["Developement Status :: 1 - Planning",
                    "Intended Audience :: Developers",

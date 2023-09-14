@@ -35,7 +35,6 @@ class Extractor:
 
     def get_info(self, option = 1):
         '''option 0: return a dataframe; option 1: write contents to excel file'''
-        print("retrieving data...")
         strg = []
         for doc in self.docs:
         #generate data from docs

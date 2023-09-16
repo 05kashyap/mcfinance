@@ -4,6 +4,7 @@ import requests
 import time
 import pandas as pd
 import json
+import importlib.resources
 
 report_cache = TTLCache(maxsize=100, ttl=3600) 
 url_cache = TTLCache(maxsize=100, ttl=3600) 
@@ -42,13 +43,12 @@ def comp_name(ticker):
     if isinstance(ticker, int):
         ticker = str(ticker)
     if ticker.isnumeric() and len(ticker) == 6:
-        with open('mcfinance/dictbse.json') as f:
+        with importlib.resources.open_text("mcfinance.data", "dictbse.json") as f:
             dictbse = json.load(f)
         return dictbse[ticker]
     elif ticker.isupper():
-        with open('mcfinance/dictnse.json') as f:
+        with importlib.resources.open_text("mcfinance.data", "dictnse.json") as f:
             dictnse = json.load(f)
         return dictnse[ticker]        
     else:
         return ticker
-

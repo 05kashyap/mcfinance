@@ -62,3 +62,6 @@ company1 = Extractor("TCS", years = 10, docs = ["ratios"])
 company2 = Extractor("Infosys", years = 10, docs = ["ratios"])
 Extractor.cmp_plot(comp = [company1, company2], attributes = "EV/EBITDA (X)")
 ```
+output:
+
+![image](https://github.com/05kashyap/mcfinance/assets/120780494/294f8313-2876-4751-9485-18517dccb0d3)

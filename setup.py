@@ -8,9 +8,9 @@ with codecs.open(os.path.join(here, "README.md"), encoding="utf-8") as fh:
     long_description = "\n" + fh.read()
 
 
-VERSION = "0.0.1"
-DESCRIPTION = "money control financial data extractor. Requires python 3.7+"
-LONG_DESCRIPTION = "First release of mcfinance"
+VERSION = "0.1.5"
+DESCRIPTION = "Money control financial data extractor-Requires python 3.7+"
+LONG_DESCRIPTION = long_description
 
 setup(name="mcfinance",
       version=VERSION,
@@ -19,13 +19,14 @@ setup(name="mcfinance",
       description=DESCRIPTION,
       long_description_content_type = "text/markdown",
       long_description= LONG_DESCRIPTION,
-      packages=find_packages(),
-      package_data={'': ['*.json']}
+      packages=['mcfinance'],
+      package_dir={'mcfinance': 'src/mcfinance'},
+      package_data={'mcfinance': ['data/*.json']},
       install_requires = ['pandas', 'bs4', 'html5lib', 'lxml','matplotlib','requests'],
       keywords=['python','financial','extractor','data'],
-      classifiers=["Developement Status :: 1 - Planning",
+      classifiers=["Development Status :: 3 - Alpha",
                    "Intended Audience :: Developers",
-                   "Programming Language :: Python :: 3",
+                   "Programming Language :: Python :: 3.11",
                    "Operating System :: Microsoft :: Windows",
                    ]
       )

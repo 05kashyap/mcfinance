@@ -1,10 +1,10 @@
 import pandas as pd
-import retrieval
+import mcfinance.retrieval
 
 def prd(url, period, last, trm, a) -> pd.DataFrame:
     '''Retrieve data for multiple years'''
     if period > a or period//5 == trm:
-        df = retrieval.retinfo(url)
+        df = mcfinance.retrieval.retinfo(url)
         df.drop(df.columns[[0,len(df.columns)-1]], inplace = True, axis=1)
         if(period == a+5 and last == 0):
             return df
@@ -17,14 +17,14 @@ def search_gen(search_term, period) -> pd.DataFrame:
     term = period%5
     last = 5 - period
     #generate datafrane from the search term
-    url = retrieval.urlfinder(search_term)
+    url = mcfinance.retrieval.urlfinder(search_term)
     urls = []
     urls = []
     for i in range(2,5):
         urlt = url + "/" + str(i) + "#" + url.split('/')[6]
         urls.append(urlt)
     #cleaning up the tables
-    df1 = retrieval.retinfo(url)
+    df1 = mcfinance.retrieval.retinfo(url)
     df1.drop(df1.columns[len(df1.columns)-1], inplace = True, axis = 1)
     if(period == 5 and last == 0):
         fdf = df1

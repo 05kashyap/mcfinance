@@ -15,7 +15,7 @@ Export any selected data into either pandas dataframe or excel sheet with ease!
 #### Create an Extractor instance with company name/ BSE/ NSE ID (required) and/or number of years(default), required documents(default), and filepath to write documents(default current directory).
 
 ```python
-import Extractor
+from mcfinance import Extractor
 Company = Extractor(user_input= "Company_name")
 #years and docs are default
 Company = Extractor(user_input= "Company_name",years = 10, docs = ["balance sheet", "profit loss"], filepath = "/files")

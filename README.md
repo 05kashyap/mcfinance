@@ -44,13 +44,13 @@ DataFrame1, DataFrame2, DataFrame3 = Company.get_info(option = 0)
 #### The plotter() function can be used to show the companies attribute from a certain document over the selected period of time using a line graph from the matplotlib library. The function accepts a single required arguement for the attribute selection. 
 
 ```python
-company.plotter(attribute = "certain file attribute of the document")
+company.plotter("certain file attribute of the document")
 ```
 #### Usage example: 
 
 ```python
 cmp = Extractor("TCS", years = 10, docs = ["ratios"])
-cmp.plotter(attribute = "EV/EBITDA (X)")
+cmp.plotter("EV/EBITDA (X)")
 ```
 output:
 

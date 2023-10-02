@@ -6,13 +6,14 @@ import mcfinance.retrieval
 
 class Extractor:
 
-    def __init__(self, user_input, years = 10, docs = ["balance sheet","profit loss","cash flow"], filepath = "") -> None:
+    def __init__(self, user_input, years = 10, docs = ["balance sheet","profit loss","cash flow"], filepath = "", proxies = "") -> None:
         '''Initialize extractor with company name, number of years and required documents'''
         self.company = mcfinance.retrieval.comp_name(user_input)
         self.company = self.company.replace(" ","")
         self.years = years
         self.docs = [doc.replace(" ","") for doc in docs]
         self.filepath = filepath
+        self.proxies = proxies
     
     #setter method
     def set_inputs(self, user_input = None, years = None, docs = None, filepath = None) -> None:
@@ -52,15 +53,36 @@ class Extractor:
     def plotter(self,*attributes):
         '''(experimental) Plots a specific company attribute over selected years'''
         attr = list(attributes)
-        adict = dict(zip(attr, self.docs))
-        for at, doc in adict.items():
-            psearch = self.company + " moneycontrol consolidated " + doc
-            X, Y = mcfinance.extractors.plo(attribute= at, search_term= psearch, period= self.years)
-            plt.plot(X,Y,"-o", label = self.company)
-            plt.xlabel("month-year")
-            plt.ylabel(at)
+        if len(self.docs) >1:# add cond for otherwise if user wishes to change it latr
+            adict = dict(zip(attr, self.docs))
+            for at, doc in adict.items():
+                psearch = self.company + " moneycontrol consolidated " + doc
+                X, Y = mcfinance.extractors.plo(attribute= at, search_term= psearch, period= self.years)
+                plt.plot(X,Y,"-o", label = self.company)
+                plt.xlabel("month-year")
+                plt.ylabel(at)
+        else:
             
-            #plt.show()
+            psearch = self.company + " moneycontrol consolidated " + self.docs[0]
+            print(psearch)
+            x = 1
+            for at in attr:
+                plt.subplot(len(attr), 1, x)
+                X, Y = mcfinance.extractors.plo(attribute= at, search_term= psearch, period=self.years)
+                print(X)
+                print(Y)
+                plt.plot(X,Y,"-o", label = at)
+                plt.title(self.company + at + "plot")
+                plt.xlabel("month-year")
+                plt.ylabel(at)
+                x +=1
+                
+            
+            
+        plt.tight_layout()
+        plt.show()
+    
+        
 
     @staticmethod
     def cmp_plot(comp, attributes):

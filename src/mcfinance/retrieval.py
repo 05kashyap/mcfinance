@@ -9,11 +9,24 @@ import importlib.resources
 report_cache = TTLCache(maxsize=100, ttl=3600) 
 url_cache = TTLCache(maxsize=100, ttl=3600) 
 
+def pr_request(url, proxies):
+    for proxy in proxies:
+        try:
+            page = requests.get(
+            url, proxies={"http": proxy, "https": proxy})
+    
+            # Prints Proxy server IP address if proxy is alive.
+            print("Status OK, Output:", page.text)
+    
+        except OSError as e:
+            # Proxy returns Connection error
+            print(e)    
+
 @cached(cache=url_cache)
 def urlfinder(search_term):
     '''Find google search results'''
     results = 5
-
+    
     page = requests.get(f"http://www.google.com/search?q={search_term}&num={results}")
     while(page.status_code == 429):
         time.sleep(5)
@@ -30,10 +43,10 @@ def urlfinder(search_term):
             return link_g
         
 @cached(cache=report_cache)
-def retinfo(url) -> pd.DataFrame:
+def retinfo(url, proxies) -> pd.DataFrame:
     '''Extract tables from a url'''
     new_url = url.replace("https", "http")
-    url = requests.get(new_url)
+    url = pr_request(new_url)
     dfs = pd.read_html(url.text)
     df = dfs[0]
     return df

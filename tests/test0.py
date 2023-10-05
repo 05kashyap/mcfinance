@@ -4,7 +4,7 @@ import os
 import sys
 import sys, os
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'mcfinance'))
-from helper import Extractor as ex
+from mcfinance.helper import Extractor as ex
 
 class Tests(unittest.TestCase):
     def test1(self):

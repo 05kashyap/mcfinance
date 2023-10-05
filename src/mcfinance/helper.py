@@ -34,20 +34,23 @@ class Extractor:
     
 
     def get_info(self, option = 1):
-        '''option 0: return a dataframe; option 1: write contents to excel file'''
-        strg = []
-        for doc in self.docs:
-        #generate data from docs
-            stx = self.company + " moneycontrol consolidated " + doc
-            if(option == 1):
-                mcfinance.writer.excel_writer(mcfinance.extractors.search_gen(stx, self.years), stx.split(), filepath=self.filepath)
+        try:
+            '''option 0: return a dataframe; option 1: write contents to excel file'''
+            strg = []
+            for doc in self.docs:
+            #generate data from docs
+                stx = self.company + " moneycontrol consolidated " + doc
+                if(option == 1):
+                    mcfinance.writer.excel_writer(mcfinance.extractors.search_gen(stx, self.years), stx.split(), filepath=self.filepath)
+                else:
+                    df1 = mcfinance.writer.df_writer(mcfinance.extractors.search_gen(search_term=stx, period=self.years))
+                    strg.append(df1)
+            if(option!=1):
+                return strg
             else:
-                df1 = mcfinance.writer.df_writer(mcfinance.extractors.search_gen(search_term=stx, period=self.years))
-                strg.append(df1)
-        if(option!=1):
-            return strg
-        else:
-            return
+                return
+        except ValueError:
+            print("Error: Invalid company name/time period")
     #just works dont TOUCH
     def plotter(self,*attributes):
         '''(experimental) Plots a specific company attribute over selected years'''

@@ -11,7 +11,7 @@ class Tests(unittest.TestCase):
             
         cmp = ex("TCS", years = 10, docs = ["balance sheet"])
         #cmp2 = ex("Infosys", years = 10, docs = ["ratios"])
-        print(str(cmp)) 
+        print(cmp) 
         #cmp.plotter("Fixed Assets","Total Current Liabilities","CURRENT ASSETS")
         #ex.cmp_plot(comp = [cmp, cmp2], attributes = "EV/EBITDA (X)")
 if __name__ == '__main__':

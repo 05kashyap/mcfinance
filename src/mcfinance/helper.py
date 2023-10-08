@@ -10,8 +10,12 @@ class Extractor:
 
     def __init__(self, user_input, years = 5, docs = ["balance sheet","profit loss","cash flow"], filepath = "", proxies = "") -> None:
         '''Initialize extractor with company name, number of years and required documents'''
-        self.company = retrieval.comp_name(user_input)
-        self.company = self.company.replace(" ","")
+        try:
+            self.company = retrieval.comp_name(user_input)
+            self.company = self.company.replace(" ","")
+        except KeyError:
+            print("Error: Invalid ticker")
+            return
         self.years = years
         self.docs = [doc.replace(" ","") for doc in docs]
         self.filepath = filepath
@@ -66,7 +70,7 @@ class Extractor:
             adict = dict(zip(attr, self.docs))
             for at, doc in adict.items():
                 psearch = self.company + " moneycontrol consolidated " + doc
-                X, Y = mcfinance.extractors.plo(attribute= at, search_term= psearch, period= self.years)
+                X, Y = extractors.plo(attribute= at, search_term= psearch, period= self.years)
                 plt.plot(X,Y,"-o", label = self.company)
                 plt.xlabel("month-year")
                 plt.ylabel(at)
@@ -77,7 +81,7 @@ class Extractor:
             x = 1
             for at in attr:
                 plt.subplot(len(attr), 1, x)
-                X, Y = mcfinance.extractors.plo(attribute= at, search_term= psearch, period=self.years)
+                X, Y = extractors.plo(attribute= at, search_term= psearch, period=self.years)
                 print(X)
                 print(Y)
                 plt.plot(X,Y,"-o", label = at)

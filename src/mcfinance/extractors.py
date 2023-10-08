@@ -1,10 +1,13 @@
 import pandas as pd
-import mcfinance.retrieval
+import os,sys
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.dirname(SCRIPT_DIR))
+from mcfinance import retrieval
 
 def prd(url, period, last, trm, a) -> pd.DataFrame:
     '''Retrieve data for multiple years'''
     if period > a or period//5 == trm:
-        df = mcfinance.retrieval.retinfo(url)
+        df = retrieval.retinfo(url)
         df.drop(df.columns[[0,len(df.columns)-1]], inplace = True, axis=1)
         if(period == a+5 and last == 0):
             return df
@@ -17,14 +20,14 @@ def search_gen(search_term, period) -> pd.DataFrame:
     term = period%5
     last = 5 - period
     #generate datafrane from the search term
-    url = mcfinance.retrieval.urlfinder(search_term)
+    url = retrieval.urlfinder(search_term)
     urls = []
     urls = []
     for i in range(2,5):
         urlt = url + "/" + str(i) + "#" + url.split('/')[6]
         urls.append(urlt)
     #cleaning up the tables
-    df1 = mcfinance.retrieval.retinfo(url)
+    df1 = retrieval.retinfo(url)
     df1.drop(df1.columns[len(df1.columns)-1], inplace = True, axis = 1)
     if(period == 5 and last == 0):
         fdf = df1
@@ -35,7 +38,12 @@ def search_gen(search_term, period) -> pd.DataFrame:
     i=1
     a = 5
     for url in urls:
-        df = prd(url, period, last, i, a)
+        df = None
+        try:
+            df = prd(url, period, last, i, a)
+        except Exception as e:
+            print(e)
+            return fdf
         fdf = pd.concat([fdf, df], join="inner", ignore_index=True, axis=1)
         i+=1
         a+=5

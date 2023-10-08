@@ -3,7 +3,7 @@ import pandas as pd
 import os
 import sys
 import sys, os
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'mcfinance'))
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src/mcfinance'))
 from helper import Extractor as ex
 
 class Tests(unittest.TestCase):

@@ -1,25 +1,30 @@
 import matplotlib.pyplot as plt
-
-import mcfinance.extractors
-import mcfinance.writer
-import mcfinance.retrieval
+import os, sys
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.dirname(SCRIPT_DIR))
+from mcfinance import extractors
+from mcfinance import writer
+from mcfinance import retrieval
 
 class Extractor:
 
-    def __init__(self, user_input, years = 10, docs = ["balance sheet","profit loss","cash flow"], filepath = "", proxies = "") -> None:
+    def __init__(self, user_input, years = 5, docs = ["balance sheet","profit loss","cash flow"], filepath = "", proxies = "") -> None:
         '''Initialize extractor with company name, number of years and required documents'''
-        self.company = mcfinance.retrieval.comp_name(user_input)
+        self.company = retrieval.comp_name(user_input)
         self.company = self.company.replace(" ","")
         self.years = years
         self.docs = [doc.replace(" ","") for doc in docs]
         self.filepath = filepath
         self.proxies = proxies
+
+    def __str__(self) -> str:
+        return f'Extractor object, name is {self.company}, number of years is {self.years}, documents are {self.docs}'
     
     #setter method
     def set_inputs(self, user_input = None, years = None, docs = None, filepath = None) -> None:
         '''Setter method for changing/adding fields'''
         if not(user_input is None):
-            self.company = mcfinance.retrieval.comp_name(user_input)
+            self.company = retrieval.comp_name(user_input)
         if not(years is None):
             self.years = years
         if not(docs is None):
@@ -36,19 +41,23 @@ class Extractor:
 
     def get_info(self, option = 1):
         '''option 0: return a dataframe; option 1: write contents to excel file'''
+        
         strg = []
         for doc in self.docs:
         #generate data from docs
             stx = self.company + " moneycontrol consolidated " + doc
             if(option == 1):
-                mcfinance.writer.excel_writer(mcfinance.extractors.search_gen(stx, self.years), stx.split(), filepath=self.filepath)
+                writer.excel_writer(extractors.search_gen(stx, self.years), stx.split(), filepath=self.filepath)
             else:
-                df1 = mcfinance.writer.df_writer(mcfinance.extractors.search_gen(search_term=stx, period=self.years))
+                df1 = writer.df_writer(extractors.search_gen(search_term=stx, period=self.years))
                 strg.append(df1)
         if(option!=1):
             return strg
         else:
             return
+       
+            
+
     #just works dont TOUCH
     def plotter(self,*attributes):
         '''(experimental) Plots a specific company attribute over selected years'''

@@ -43,11 +43,18 @@ def urlfinder(search_term):
             return link_g
         
 @cached(cache=report_cache)
-def retinfo(url, proxies) -> pd.DataFrame:
+def retinfo(url) -> pd.DataFrame:
     '''Extract tables from a url'''
     new_url = url.replace("https", "http")
-    url = pr_request(new_url)
-    dfs = pd.read_html(url.text)
+    url = requests.get(new_url)
+    dfs = None
+    
+    try:
+        dfs = pd.read_html(url.text)
+    
+    except(ValueError):
+        return pd.DataFrame()
+    
     df = dfs[0]
     return df
 

@@ -6,7 +6,6 @@ import pandas as pd
 import json
 import importlib.resources
 
-report_cache = TTLCache(maxsize=100, ttl=3600) 
 url_cache = TTLCache(maxsize=100, ttl=3600) 
 
 def pr_request(url, proxies):
@@ -42,7 +41,6 @@ def urlfinder(search_term):
             link_g = link.get('href').split("?q=")[1].split("&sa=U")[0]
             return link_g
         
-@cached(cache=report_cache)
 def retinfo(url) -> pd.DataFrame:
     '''Extract tables from a url'''
     new_url = url.replace("https", "http")
@@ -66,7 +64,7 @@ def comp_name(ticker):
         with importlib.resources.open_text("mcfinance.data", "dictbse.json") as f:
             dictbse = json.load(f)
         return dictbse[ticker]
-    elif ticker.isupper():
+    elif ticker.isupper() and ' ' not in ticker:
         with importlib.resources.open_text("mcfinance.data", "dictnse.json") as f:
             dictnse = json.load(f)
         return dictnse[ticker]        

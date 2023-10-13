@@ -1,9 +1,13 @@
 import pandas as pd
 import os,sys
+from cachetools import cached, TTLCache
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.dirname(SCRIPT_DIR))
 from mcfinance import retrieval
 
+report_cache = TTLCache(maxsize=100, ttl=3600) 
+
+@cached(cache=report_cache)
 def prd(url, period, last, trm, a) -> pd.DataFrame:
     '''Retrieve data for multiple years'''
     if period > a or period//5 == trm:

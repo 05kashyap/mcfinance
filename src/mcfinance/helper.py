@@ -13,9 +13,8 @@ class Extractor:
         try:
             self.company = retrieval.comp_name(user_input)
             self.company = self.company.replace(" ","")
-        except KeyError:
-            print("Error: Invalid ticker")
-            return
+        except KeyError as e:
+            raise Exception("Error: Invalid ticker".format(e)) from None
         self.years = years
         self.docs = [doc.replace(" ","") for doc in docs]
         self.filepath = filepath
@@ -56,6 +55,7 @@ class Extractor:
                 df1 = writer.df_writer(extractors.search_gen(search_term=stx, period=self.years))
                 strg.append(df1)
         if(option!=1):
+            if len(strg) == 1: return strg[0]
             return strg
         else:
             return

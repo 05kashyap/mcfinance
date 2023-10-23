@@ -11,6 +11,9 @@ Export any selected data into either pandas dataframe or excel sheet with ease!
 *Disclaimer*: We are in no way affiliated with moneycontrol.com
  
 ## Usage:
+```python
+pip install mcfinance
+```
 ### Initialise company details:
 #### Create an Extractor instance with company name/ BSE/ NSE ID (required) and/or number of years(default), required documents(default), and filepath to write documents(default current directory).
 

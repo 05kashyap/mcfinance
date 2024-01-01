@@ -1,7 +1,7 @@
 # mcfinance
 
 Developed by ragha1992 and 05kashyap
-
+[![Downloads](https://static.pepy.tech/badge/mcfinance)](https://pepy.tech/project/mcfinance)
 ## Description:
 
 Extract financial data from the money control website using the company name, BSE or NSE number.

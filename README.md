@@ -1,6 +1,6 @@
 # mcfinance
 
-### Developed by ragha1992 and 05kashyap
+### Developed by 05kashyap and ragha1992
 ### PyPI stats:
 [![Downloads](https://static.pepy.tech/badge/mcfinance)](https://pepy.tech/project/mcfinance)
 ## Description:

@@ -26,7 +26,6 @@ def search_gen(search_term, period) -> pd.DataFrame:
     #generate datafrane from the search term
     url = retrieval.urlfinder(search_term)
     urls = []
-    urls = []
     for i in range(2,5):
         urlt = url + "/" + str(i) + "#" + url.split('/')[6]
         urls.append(urlt)

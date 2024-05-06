@@ -37,7 +37,7 @@ def urlfinder(search_term):
     links = soup1.findAll("a")
     for link in links :
         link_href = link.get('href')
-        if "url?q=" in link_href and not "webcache" in link_href:
+        if "moneycontrol.com" in link_href and "url?q=" in link_href and not "webcache" in link_href:
             link_g = link.get('href').split("?q=")[1].split("&sa=U")[0]
             return link_g
         

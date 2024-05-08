@@ -1,7 +1,8 @@
 # mcfinance
 
-Developed by ragha1992 and 05kashyap
-
+### Developed by 05kashyap and ragha1992
+### PyPI stats:
+[![Downloads](https://static.pepy.tech/badge/mcfinance)](https://pepy.tech/project/mcfinance)
 ## Description:
 
 Extract financial data from the money control website using the company name, BSE or NSE number.
@@ -11,24 +12,15 @@ Export any selected data into either pandas dataframe or excel sheet with ease!
 *Disclaimer*: We are in no way affiliated with moneycontrol.com
  
 ## Usage:
+```python
+pip install mcfinance
+```
 ### Initialise company details:
-#### Create an Extractor instance with company name/ BSE/ NSE ID and/or number of years(default), required documents(default), and filepath to write documents(default current directory).
+#### Create an Extractor instance with company name/ BSE/ NSE ID (required) and/or number of years(default), required documents(default), and filepath to write documents(default current directory).
 
 ```python
 from mcfinance import Extractor
-```
-```python
 Company = Extractor(user_input= "Company_name")
-```
-or input the BSE listing number(int) (number can be used as input directly)
-```python
-Company = Extractor(user_input= BSEnumber)
-```
-or input the NSE listing code (code can be used as input directly)
-```python
-Company = Extractor(user_input= "NSEcode")
-```
-```python
 #years and docs are default
 Company = Extractor(user_input= "Company_name",years = 10, docs = ["balance sheet", "profit loss"], filepath = "/files")
 ```
@@ -36,15 +28,6 @@ any of the inputs can be changed later on as per user convenience
 ```python
 Company.set_inputs(years = 6)
 ```
-We can view the initialised details using: 
-```python
-print(Company)
-```
-output:
-```
-Extractor object, name is Company_name, number of years is 10, documents are ["balancesheet", "profit loss"]
-```
-
 ### Export company details as excel file (default)
 #### The get_info() function can be used to extract and store company data in an excel file. The file will be stored in the current filepath or the user defined filepath as per object initialisation 
 

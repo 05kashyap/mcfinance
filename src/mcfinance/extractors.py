@@ -59,6 +59,7 @@ def plo(attribute, search_term, period):
     print("plotting...")
     df = search_gen(search_term, period)
     col_names = df.loc[0, :].values.flatten().tolist()
+    print(col_names)
     X = col_names[1:]
     X.reverse()
     if(df[df.columns[0]] == attribute).any():

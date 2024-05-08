@@ -80,18 +80,16 @@ class Extractor:
             print(psearch)
             x = 1
             for at in attr:
+                print(f"Attributes: {at}")
                 plt.subplot(len(attr), 1, x)
                 X, Y = extractors.plo(attribute= at, search_term= psearch, period=self.years)
                 print(X)
                 print(Y)
                 plt.plot(X,Y,"-o", label = at)
-                plt.title(self.company + at + "plot")
+                plt.title(self.company +" " +at + " plot")
                 plt.xlabel("month-year")
                 plt.ylabel(at)
-                x +=1
-                
-            
-            
+                x +=1        
         plt.tight_layout()
         plt.show()
     

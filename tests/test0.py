@@ -1,7 +1,7 @@
 import unittest
 import pandas as pd
 import sys, os
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src/mcfinance'))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..','src/mcfinance')))
 from helper import Extractor as ex
 
 class Tests(unittest.TestCase):

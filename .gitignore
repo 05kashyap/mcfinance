@@ -1,2 +1,7 @@
 src/mcfinance/__pycache__
 venv
+build
+dist
+mcfinance.egg-info
+env
+.env

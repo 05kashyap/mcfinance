@@ -1,5 +1,6 @@
 from cachetools import cached, TTLCache
 from bs4 import BeautifulSoup
+from io import StringIO
 import requests
 import time
 import pandas as pd
@@ -48,7 +49,8 @@ def retinfo(url) -> pd.DataFrame:
     dfs = None
     
     try:
-        dfs = pd.read_html(url.text)
+        html_string = StringIO(url.text)
+        dfs = pd.read_html(html_string)
     
     except(ValueError):
         return pd.DataFrame()

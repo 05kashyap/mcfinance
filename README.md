@@ -3,6 +3,7 @@
 ### Developed by 05kashyap and ragha1992
 ### PyPI stats:
 [![Downloads](https://static.pepy.tech/badge/mcfinance)](https://pepy.tech/project/mcfinance)
+[![Downloads](https://static.pepy.tech/badge/mcfinance/month)](https://pepy.tech/project/mcfinance)
 ## Description:
 
 Extract financial data from the money control website using the company name, BSE or NSE number.
